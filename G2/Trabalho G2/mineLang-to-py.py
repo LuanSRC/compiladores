@@ -100,8 +100,8 @@ def lex(source: str) -> List['Token']:
         if ch == "#":
             while i < n and peek() != "\n":
                 advance()
-            continue
-
+            continue    
+        
         # Comentário de bloco: /* ... */
         if ch == "/" and peek(1) == "*":
             start_l, start_c = line, col

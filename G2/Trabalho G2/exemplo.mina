@@ -15,6 +15,3 @@ SE_RISCO (nivel == 0) {
 } SENAO_OPERADOR {
     ALERTAR_EQUIPE("Continuar varredura...")
 }
-
-# Palavras-chave em strings devem ser preservadas:
-ALERTAR_EQUIPE("SENAO_OPERADOR não deve virar else dentro de string")
