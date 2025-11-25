@@ -1,0 +1,12 @@
+# Cálculo simples com alertas
+
+OPERACAO calcular_risco(minas, operadores) {
+    risco MARCAR_AREA minas INTENSIFICAR operadores
+    ALERTAR_EQUIPE("Risco estimado:")
+    ALERTAR_EQUIPE(risco)
+    RETORNAR_STATUS risco
+}
+
+nivel MARCAR_AREA calcular_risco(3, 2)
+ALERTAR_EQUIPE("Nível total de risco:")
+ALERTAR_EQUIPE(nivel)

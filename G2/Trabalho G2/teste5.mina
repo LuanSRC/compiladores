@@ -1,0 +1,4 @@
+# Teste para garantir que palavras em strings não são traduzidas
+
+ALERTAR_EQUIPE("OPERACAO, SE_RISCO e MARCAR_AREA dentro de texto não mudam.")
+ALERTAR_EQUIPE("SENAO_OPERADOR também não deve virar else.")

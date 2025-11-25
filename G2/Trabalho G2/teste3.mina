@@ -1,0 +1,17 @@
+# Funções com multiplicação e divisão
+
+OPERACAO ajustar_equipamento(capacidade, minas) {
+    eficiencia MARCAR_AREA capacidade DISTRIBUIR_RECURSOS minas
+    RETORNAR_STATUS eficiencia
+}
+
+OPERACAO calcular_efetividade(base, fator) {
+    resultado MARCAR_AREA base AMPLIFICAR fator
+    RETORNAR_STATUS resultado
+}
+
+ef MARCAR_AREA ajustar_equipamento(10, 2)
+ef MARCAR_AREA calcular_efetividade(ef, 3)
+
+ALERTAR_EQUIPE("Efetividade final:")
+ALERTAR_EQUIPE(ef)

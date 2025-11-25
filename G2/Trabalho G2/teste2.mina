@@ -1,0 +1,15 @@
+# Varredura contínua do campo
+
+nivel MARCAR_AREA 5
+
+ENQUANTO_ESCANEANDO (nivel > 0) {
+    ALERTAR_EQUIPE("Nível atual:")
+    ALERTAR_EQUIPE(nivel)
+    nivel MARCAR_AREA nivel DESATIVAR 1
+}
+
+SE_RISCO (nivel == 0) {
+    ALERTAR_EQUIPE("Campo limpo.")
+} SENAO_OPERADOR {
+    ALERTAR_EQUIPE("Ainda há perigo.")
+}

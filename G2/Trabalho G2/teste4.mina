@@ -1,0 +1,18 @@
+# Controle de varredura com condições internas
+
+nivel MARCAR_AREA 3
+
+ENQUANTO_ESCANEANDO (nivel > 0) {
+    ALERTAR_EQUIPE("Verificando nível:")
+    ALERTAR_EQUIPE(nivel)
+
+    SE_RISCO (nivel INTENSIFICAR 1 > 5) {
+        ALERTAR_EQUIPE("Nível muito alto! Retornar à base.")
+    } SENAO_OPERADOR {
+        ALERTAR_EQUIPE("Seguir escaneando...")
+    }
+
+    nivel MARCAR_AREA nivel DESATIVAR 1
+}
+
+ALERTAR_EQUIPE("Operação concluída.")
