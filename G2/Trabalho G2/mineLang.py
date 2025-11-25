@@ -27,7 +27,7 @@ KEYWORDS_MAP = {
     "DESATIVAR": "-",
     "AMPLIFICAR": "*",
     "DISTRIBUIR_RECURSOS": "/",
-    "RETORNAR_STATUS": "return",
+    "RETORNAR_STATUS": "return",        
 }
 
 # Cabeçalhos de bloco em Python (devem terminar com ':')
