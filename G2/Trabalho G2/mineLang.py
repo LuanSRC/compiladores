@@ -27,7 +27,7 @@ KEYWORDS_MAP = {
     "DESATIVAR": "-",
     "AMPLIFICAR": "*",
     "DISTRIBUIR_RECURSOS": "/",
-    "RETORNAR_STATUS": "return",        
+    "RETORNAR_STATUS": "return",
 }
 
 # Cabeçalhos de bloco em Python (devem terminar com ':')
@@ -60,7 +60,7 @@ class Token:
 # -----------------------------
 # Lexer: tokeniza sem tocar em strings/comentários
 # -----------------------------
-def lex(source: str) -> List['Token']:
+def lex(source: str) -> List[Token]:
     tokens: List[Token] = []
     i = 0
     line = 1
@@ -100,8 +100,8 @@ def lex(source: str) -> List['Token']:
         if ch == "#":
             while i < n and peek() != "\n":
                 advance()
-            continue    
-        
+            continue
+
         # Comentário de bloco: /* ... */
         if ch == "/" and peek(1) == "*":
             start_l, start_c = line, col
@@ -150,7 +150,26 @@ def lex(source: str) -> List['Token']:
             buf = [advance()]
             while i < n and (peek().isalnum() or peek() == "_"):
                 buf.append(advance())
-            emit("IDENT", "".join(buf), start_l, start_c)
+            ident = "".join(buf)
+
+            # ------------------------------------------------------
+            # VALIDAÇÃO LÉXICA DAS PALAVRAS-CHAVE MINELANG
+            # ------------------------------------------------------
+            # Regra (decisão de design):
+            # - Se o identificador estiver TODO em maiúsculas (ex.: OPERACAO, SE_RISCO)
+            # - E NÃO estiver em KEYWORDS_MAP
+            # => Consideramos que o operador tentou usar um comando MineLang
+            #    e escreveu errado -> erro léxico.
+            #
+            # Isso impede gerar Python inválido quando, por exemplo:
+            #   OPERAÇAO, OPERACAOX, SE_RISKO etc.
+            if ident.isupper() and ident not in KEYWORDS_MAP:
+                raise LexerError(
+                    f"Palavra-chave MineLang desconhecida '{ident}' em {start_l}:{start_c}. "
+                    f"Verifique se o nome do comando está escrito corretamente."
+                )
+
+            emit("IDENT", ident, start_l, start_c)
             continue
 
         # Números (inteiros/floats simples)
@@ -243,7 +262,7 @@ class Emitter:
             self.lines.pop()
         return "\n".join(self.lines) + "\n"
 
-def translate(tokens: List['Token']) -> str:
+def translate(tokens: List[Token]) -> str:
     out = Emitter()
 
     pending_header = False     # último token foi def/if/else/while (aguarda '{' para ':')
@@ -357,7 +376,7 @@ def main():
 
     outpath = args.output
     if not outpath:
-        if args.entrada.lower().endswith(".mina"):
+        if args.entrada.lower().endswitAh(".mina"):
             outpath = args.entrada[:-5] + ".py"
         else:
             outpath = args.entrada + ".py"
